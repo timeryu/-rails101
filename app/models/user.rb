@@ -5,7 +5,13 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+         def join!(group)
+            participated_groups << group
+          end
 
+          def quit!(group)
+            participated_groups.delete(group)
+          end
   has_many :groups
   has_many :posts
   has_many :group_relationships
